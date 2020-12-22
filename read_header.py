@@ -4,14 +4,18 @@ bindata = []
 asciidata = []
 chardata = []
 outfile = 'out.txt'
+bits_to_read = '2048'
+
+if os.path.exists(outfile):
+    os.remove(outfile)
 
 def writelog(message):
-    file = open(outfile, 'a+')
+    file = open(outfile, 'a+', encoding="utf-8")
     file.write(message + '\n')
     file.close()
 
 with open('Disc 1 - 2 - Master of Puppets.mp3','rb') as file:
-    first_32 = file.read(256)
+    first_32 = file.read(int(bits_to_read))
 
 for i in range(0, len(first_32)):
     hexdata.append(hex(first_32[i]))
